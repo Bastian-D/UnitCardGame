@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ResourceSystem : Singleton<ResourceSystem>
 {
-    //public List<UnitData> Units { get; private set; }
+    public List<CardData> Cards { get; private set; }
 
     protected override void Awake()
     {
@@ -14,6 +14,6 @@ public class ResourceSystem : Singleton<ResourceSystem>
 
     private void AssembleResources()
     {
-        //Units = Resources.LoadAll<UnitData>("Units").ToList();
+        Cards = Resources.LoadAll<CardData>("Cards").ToList();
     }
 }
