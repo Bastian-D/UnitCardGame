@@ -7,7 +7,7 @@ public class Card : MonoBehaviour
 {
     private TMPro.TextMeshProUGUI title;
     private TMPro.TextMeshProUGUI desc;
-    private Sprite sprite;
+    private Image image;
     private Vector3 originPosition;
     private int originHierarchyPosition;
     private bool isOverPlayArea = false;
@@ -38,11 +38,11 @@ public class Card : MonoBehaviour
     {
         title = transform.Find("Title").GetComponent<TMPro.TextMeshProUGUI>();
         desc = transform.Find("Desc").GetComponent<TMPro.TextMeshProUGUI>();
-        sprite = transform.Find("Image").GetComponent<Image>().sprite;
+        image = transform.Find("Image").GetComponent<Image>();
 
         title.text = data.Title;
         desc.text = data.Desc;
-        sprite = data.Sprite;
+        image.sprite = data.Sprite;
     }
 
     public void onMsgDragStarted()
