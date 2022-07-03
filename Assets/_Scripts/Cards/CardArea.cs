@@ -111,7 +111,6 @@ public class CardArea : MonoBehaviour
         );
 
         card.GetComponent<Card>().data = data;
-        card.transform.Find("Image").GetComponent<Image>().sprite = data.Sprite;
 
         return card;
     }
@@ -119,10 +118,9 @@ public class CardArea : MonoBehaviour
     private List<CardData> loadCardDeck()
     {
         //TODO load deck from deckbuilder in the future
-        List<CardData> cardsData = ResourceSystem.Instance.Cards;
         List<CardData> deck = new List<CardData>();
 
-        foreach (var data in cardsData)
+        foreach (var data in ResourceSystem.Instance.Cards)
         {
             for (int i = 0; i < UnityEngine.Random.Range(1, 3); i++)
             {

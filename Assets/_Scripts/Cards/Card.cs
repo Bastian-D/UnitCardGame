@@ -5,8 +5,9 @@ using UnityEngine.UI;
 
 public class Card : MonoBehaviour
 {
-    private TMPro.TextMeshProUGUI cardTitle;
-    private TMPro.TextMeshProUGUI cardDesc;
+    private TMPro.TextMeshProUGUI title;
+    private TMPro.TextMeshProUGUI desc;
+    private Sprite sprite;
     private Vector3 originPosition;
     private int originHierarchyPosition;
     private bool isOverPlayArea = false;
@@ -15,7 +16,7 @@ public class Card : MonoBehaviour
 
     void Start()
     {
-        setupText();
+        setup();
     }
 
     void Update()
@@ -33,13 +34,15 @@ public class Card : MonoBehaviour
         isOverPlayArea = false;
     }
 
-    private void setupText()
+    private void setup()
     {
-        cardTitle = transform.Find("Title").gameObject.GetComponent<TMPro.TextMeshProUGUI>();
-        cardDesc = transform.Find("Desc").gameObject.GetComponent<TMPro.TextMeshProUGUI>();
+        title = transform.Find("Title").GetComponent<TMPro.TextMeshProUGUI>();
+        desc = transform.Find("Desc").GetComponent<TMPro.TextMeshProUGUI>();
+        sprite = transform.Find("Image").GetComponent<Image>().sprite;
 
-        cardTitle.text = data.Title;
-        cardDesc.text = data.Desc;
+        title.text = data.Title;
+        desc.text = data.Desc;
+        sprite = data.Sprite;
     }
 
     public void onMsgDragStarted()
