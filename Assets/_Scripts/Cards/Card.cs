@@ -11,7 +11,7 @@ public class Card : MonoBehaviour
     private int originHierarchyPosition;
     private bool isOverPlayArea = false;
 
-    public CardModel model;
+    public CardData data;
 
     void Start()
     {
@@ -38,8 +38,8 @@ public class Card : MonoBehaviour
         cardTitle = transform.Find("Title").gameObject.GetComponent<TMPro.TextMeshProUGUI>();
         cardDesc = transform.Find("Desc").gameObject.GetComponent<TMPro.TextMeshProUGUI>();
 
-        cardTitle.text = model.title;
-        cardDesc.text = model.desc;
+        cardTitle.text = data.Title;
+        cardDesc.text = data.Desc;
     }
 
     public void onMsgDragStarted()

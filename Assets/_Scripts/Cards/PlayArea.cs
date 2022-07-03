@@ -37,7 +37,7 @@ public class PlayArea : MonoBehaviour
 
         //TODO implement logik for card effect execution
         print(Input.mousePosition);
-        print(card.GetComponent<Card>().model.title);
+        print(card.GetComponent<Card>().data.Title);
     }
 
 }

@@ -5,22 +5,22 @@ using UnityEngine;
 
 public class CardDeck
 {
-    private List<CardModel> cards = new List<CardModel>();
+    private List<CardData> cards = new List<CardData>();
 
     public CardDeck()
     { }
 
-    public CardDeck(List<CardModel> cards)
+    public CardDeck(List<CardData> cardsData)
     {
-        this.cards = cards;
+        cards = cardsData;
     }
 
-    public List<CardModel> getCards()
+    public List<CardData> getCards()
     {
         return cards;
     }
 
-    public void addCard(CardModel card, bool shuffel = false)
+    public void addCard(CardData card, bool shuffel = false)
     {
         cards.Add(card);
 
@@ -32,7 +32,7 @@ public class CardDeck
         DeckEventLib.cardAdded.callEvent(EventArgs.Empty);
     }
 
-    public void addCards(List<CardModel> cards, bool shuffel = true)
+    public void addCards(List<CardData> cards, bool shuffel = true)
     {
         if (shuffel)
         {
@@ -44,7 +44,7 @@ public class CardDeck
         DeckEventLib.cardAdded.callEvent(EventArgs.Empty);
     }
 
-    public List<CardModel> drawCards(int cardsToDraw)
+    public List<CardData> drawCards(int cardsToDraw)
     {   
         int avalibleIndices = cards.Count - 1;
 
@@ -56,7 +56,7 @@ public class CardDeck
         return cards.GetRange(0, cardsToDraw);
     }
 
-    public void removeCard(CardModel card)
+    public void removeCard(CardData card)
     {
         cards.Remove(card);
 
@@ -74,7 +74,7 @@ public class CardDeck
     {
         for (int i = 0; i < cards.Count - 1; i++)
         {
-            CardModel item = cards[i];
+            CardData item = cards[i];
             int randNum = UnityEngine.Random.Range(i, cards.Count);
 
             cards[i] = cards[randNum];
@@ -82,11 +82,11 @@ public class CardDeck
         }
     }
 
-    public void shuffel(List<CardModel> list)
+    public void shuffel(List<CardData> list)
     {
         for (int i = 0; i < list.Count - 1; i++)
         {
-            CardModel item = list[i];
+            CardData item = list[i];
             int randNum = UnityEngine.Random.Range(i, list.Count);
 
             list[i] = list[randNum];

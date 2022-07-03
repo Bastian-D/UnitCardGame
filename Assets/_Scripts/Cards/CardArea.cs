@@ -49,13 +49,13 @@ public class CardArea : MonoBehaviour
     public void onCardPlayed(object sender, CardEventLib.CardPlayedEventArgs args)
     {
         GameObject card = args.card;
-        CardModel model = card.GetComponent<Card>().model;
+        CardData data = card.GetComponent<Card>().data;
 
         cardsInHand.Remove(card);
-        discardDeck.addCard(model);
+        discardDeck.addCard(data);
         Destroy(card);
 
-        if(cardsInHand.Count == 0)
+        if (cardsInHand.Count == 0)
         {
             redraw();
         }
@@ -76,9 +76,9 @@ public class CardArea : MonoBehaviour
         for (int i = 0; i < hand.transform.childCount; i++)
         {
             GameObject card = hand.transform.GetChild(i).gameObject;
-            CardModel model = card.GetComponent<Card>().model;
+            CardData data = card.GetComponent<Card>().data;
 
-            discardDeck.addCard(model);
+            discardDeck.addCard(data);
 
             Destroy(card);
         }
@@ -91,17 +91,17 @@ public class CardArea : MonoBehaviour
             refillDeckWithDiscardedCards();
         }
 
-        List<CardModel> drawnCards = deck.drawCards(cardsToDraw);
+        List<CardData> drawnCards = deck.drawCards(cardsToDraw);
 
-        drawnCards.ForEach(card =>
+        drawnCards.ForEach(cardData =>
         {
-            cardsInHand.Add(initCard(hand, card));
+            cardsInHand.Add(initCard(hand, cardData));
 
-            deck.removeCard(card);
+            deck.removeCard(cardData);
         });
     }
 
-    private GameObject initCard(GameObject parent, CardModel model)
+    private GameObject initCard(GameObject parent, CardData data)
     {
         GameObject card = Instantiate(
             cardPrefab,
@@ -110,28 +110,27 @@ public class CardArea : MonoBehaviour
             hand.transform
         );
 
-        card.GetComponent<Card>().model = model;
-        card.transform.Find("Image").GetComponent<Image>().sprite = model.sprite;
+        card.GetComponent<Card>().data = data;
+        card.transform.Find("Image").GetComponent<Image>().sprite = data.Sprite;
 
         return card;
     }
 
-    private List<CardModel> loadCardDeck()
+    private List<CardData> loadCardDeck()
     {
+        //TODO load deck from deckbuilder in the future
         List<CardData> cardsData = ResourceSystem.Instance.Cards;
-        List<CardModel> models = new List<CardModel>();
+        List<CardData> deck = new List<CardData>();
 
         foreach (var data in cardsData)
         {
-            models.Add(new CardModel(data));
-            models.Add(new CardModel(data));
-            models.Add(new CardModel(data));
-            models.Add(new CardModel(data));
-            models.Add(new CardModel(data));
-            models.Add(new CardModel(data));
+            for (int i = 0; i < UnityEngine.Random.Range(1, 3); i++)
+            {
+                deck.Add(data);
+            }
         }
 
-        return models;
+        return deck;
     }
 
     private void refillDeckWithDiscardedCards()
